@@ -22,10 +22,15 @@ if (Object.prototype.$augment === undefined) {
         }, '$super': {
             value: function () {
                 var proto = Object.getPrototypeOf(this.$_stack[this.$_stack.length - 1]);
-                this.$_stack.push(proto);
-                var result = proto[arguments.callee.caller.name].apply(this, arguments);
-                this.$_stack.pop();
-                return result;
+                if ( proto.hasOwnPoperty(arguments.callee.caller.name) ) {
+                    this.$_stack.push(proto);
+                    var result = proto[arguments.callee.caller.name].apply(this, arguments);
+                    this.$_stack.pop();
+                    return result;
+                }
+                else {
+                   this.$super.apply(this, arguments) ;
+                }
             }
         }
     });
