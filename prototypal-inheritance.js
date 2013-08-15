@@ -9,7 +9,7 @@ if (Object.prototype.$augment === undefined) {
                 Object.defineProperty(newObj, '$_proto_', {
                     value: newObj, enumerable: false, writable: true
                 });
-                for (var p in proto ) {
+                for (var p in proto) {
                     if (proto.hasOwnProperty(p)) {
                         newObj[p] = proto[p];
                     }
@@ -19,7 +19,7 @@ if (Object.prototype.$augment === undefined) {
         }, '$new': {
             value: function () {
                 var newObj = Object.create(this);
-                newObj.constructor.apply(newObj, arguments);
+                newObj.initialize.apply(newObj, arguments);
                 return newObj;
             }
         }, '$super': {
@@ -30,13 +30,13 @@ if (Object.prototype.$augment === undefined) {
                 else {
                     var _proto_ = Object.getPrototypeOf(this.$_proto_) ;
                     while( _proto_ !== null &&
-                            (!_proto_.hasOwnProperty(arguments.callee.caller.name) ||
-                              _proto_[arguments.callee.caller.name] !== arguments.callee.caller) ){
-                            _proto_ = Object.getPrototypeOf(_proto_) ;
+                        (!_proto_.hasOwnProperty(arguments.callee.caller.name) ||
+                            _proto_[arguments.callee.caller.name] === arguments.callee.caller) ){
+                        _proto_ = Object.getPrototypeOf(_proto_) ;
                     }
 
                     if ( _proto_ ) {
-                        this.$_proto_ = _proto_ ;
+                        this.$_proto_ = _proto_                 ;
                         var val = _proto_[arguments.callee.caller.name].apply(this, arguments);
                         this.$_proto_ = this ;
                         return val ;
