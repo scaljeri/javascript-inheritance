@@ -38,7 +38,7 @@ example:
 
     var Foo = Bar.$augment( {
     	constructor: function constructor(msg) {
-    		this.$super(msg. 100) ;
+    		this.$super(msg, 100) ;
     	}
     	, getMessage: function getMessage() {
     		return 'Foo ' + this.$super() ;

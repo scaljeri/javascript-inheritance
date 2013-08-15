@@ -3,7 +3,7 @@ if (Object.prototype.$augment === undefined) {
         '$augment': {
             value: function (proto) {
                 var newObj = Object.create(this);
-                Object.defineProperty(newObj, '$_stack', {
+                Object.defineProperty(newObj, '$_proto_', {
                     value: [newObj], enumerable: false
                 });
                 for (var p in proto) {
@@ -21,15 +21,19 @@ if (Object.prototype.$augment === undefined) {
             }
         }, '$super': {
             value: function () {
-                var proto = Object.getPrototypeOf(this.$_stack[this.$_stack.length - 1]);
-                if ( proto.hasOwnPoperty(arguments.callee.caller.name) ) {
-                    this.$_stack.push(proto);
-                    var result = proto[arguments.callee.caller.name].apply(this, arguments);
-                    this.$_stack.pop();
-                    return result;
+                if ( arguments.callee.caller.name === "" ) {
+                    console.error("this.$super cannot be used in an anonymouse function!") ;
                 }
                 else {
-                   this.$super.apply(this, arguments) ;
+                    var _proto_ = Object.getPrototypeOf(this.$_proto_) ;
+                    while( _proto_ !== null && !_proto_.hasOwnProperty(arguments.callee.caller.name) ){
+                       _proto_ = Object.getPrototypeOf(_proto_) ;
+                    }
+
+                    if ( _proto_ ) {
+                        this.$_proto_ = _proto_ ;
+                        return _proto_[arguments.callee.caller.name].apply(this, arguments);
+                    }
                 }
             }
         }
