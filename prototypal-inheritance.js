@@ -25,7 +25,7 @@ if (Object.prototype.$augment === undefined) {
         }, '$super': {
             value: function () {
                 if ( arguments.callee.caller.name === "" ) {
-                    console.error("this.$super cannot be used in an anonymouse function!") ;
+                    throw "Error: this.$super cannot be used inside anonymouse functions" ;
                 }
                 else {
                     var _proto_ = Object.getPrototypeOf(this.$_proto_) ;
