@@ -4,7 +4,7 @@ if (Object.prototype.$augment === undefined) {
             value: function (proto) {
                 var newObj = Object.create(this);
                 Object.defineProperty(newObj, '$_proto_', {
-                    value: [newObj], enumerable: false
+                    value: newObj, enumerable: false
                 });
                 for (var p in proto) {
                     if (proto.hasOwnProperty(p)) {
