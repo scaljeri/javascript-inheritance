@@ -3,10 +3,9 @@
         Object.defineProperties(Object.prototype, {
             '$augment': {
                 value: function (constructor, proto, preserve) {
-                    var newProto = Object.create(this), type = 'prototypal' ;
+                    var newProto = Object.create(this) ;
                     if ( constructor.apply ) { // its a function - constructor
                        newProto = buildConstructor.apply(this, arguments) ;
-                       type = 'classical' ;
                     }
                     else {
                        proto = constructor||{} ;
@@ -15,7 +14,6 @@
                     Object.defineProperties(newProto, {
                           '$_proto_': { value: newProto, enumerable: false, writable: true }
                         , '$_name_' : { value: null, enumerable: false, writable: true}
-                        , '$_type'  : { value: type, enumerable: false }
                     });
 
                     for (var p in proto) { // no proto.hasOwnProperty, copy all properties!
