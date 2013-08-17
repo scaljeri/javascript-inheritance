@@ -1,7 +1,7 @@
 javascript-inheritance
 ======================
 
-JavaScript helper functions for Classical and Prototypal Inheritance
+JavaScript helper functions for Classical and Prototypal Inheritance [![Build Status](https://travis-ci.org/scaljeri/javascript-inheritance.png)](https://travis-ci.org/scaljeri/javascript-inheritance)
 
 example:
 
