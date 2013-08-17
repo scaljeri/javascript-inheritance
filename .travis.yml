@@ -3,4 +3,5 @@ node_js:
   - 0.10
 before_script:
   - npm install -g grunt-cli
+  - travis_retry bundle install --binstubs
 script: grunt test --verbose --force
