@@ -5,7 +5,7 @@ JavaScript helper functions for Classical and Prototypal Inheritance
 
 example:
 
-  var Base = Object.$augment( function() { // create closure
+  var Base = Object.$augment( (function() { // create closure
         var message = '' ;
         return  {
                 initialize: function(msg, total) {
@@ -22,7 +22,7 @@ example:
                         this.total += value ;
                 }
         } ;
-    }) ;
+    })()) ;
 
     var Bar = Base.$augment( {
         initialize: function initialize(msg) {
