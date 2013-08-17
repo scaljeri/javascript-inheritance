@@ -1,0 +1,27 @@
+{
+  "name": "javascript-inheritance",
+  "version": "1.0.0",
+  "description": "Javascript Inheritance helper functions for both Classical and Prototypal Inheritance.",
+  "main": "javascript-inheritance.js",
+  "scripts": {
+    "test": "grunt test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/scaljeri/javascript-inheritance.git"
+  },
+  "keywords": [
+    "javascript",
+    "inheritance",
+    "classical",
+    "prototypal"
+  ],
+  "author": "Lucas Calje",
+  "license": "Eclipse Public License",
+  "dependencies": {
+    "grunt": "~0.4.1"
+  },
+  "devDependencies": {
+    "grunt-contrib-jasmine": "~0.5.1"
+  }
+}
