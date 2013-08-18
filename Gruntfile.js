@@ -27,10 +27,17 @@ module.exports = function(grunt) {
         , 'jasmine-server' : {
             browser : false
         }
+        , jshint: {
+            all: ['*.js', 'specs/*.js']
+            , options: {
+                jshintrc: '.jshintrc'
+            }
+        }
     }) ;
     grunt.loadNpmTasks('grunt-contrib-jasmine');
+    grunt.loadNpmTasks('grunt-contrib-jshint');
 
     grunt.registerTask('test', 'jasmine');
     // Default task.
-    grunt.registerTask('default', 'jasmine');
+    grunt.registerTask('default', ['jasmine','jshint']);
 };
