@@ -3,23 +3,16 @@
         Object.defineProperties(Object.prototype, {
             '$augment': {
                 value: function (constructor, proto, preserve) {
-                    var newProto = Object.create(this) ;
+                    var newObj ;
                     if ( constructor.apply ) { // its a function - constructor
-                       newProto = buildConstructor.apply(this, arguments) ;
+                       newObj = buildConstructor.apply(this, arguments) ;
+                       setProperties(newObj.prototype,proto) ; // constructor holds proto
                     }
                     else {
-                       proto = constructor||{} ;
+                       newObj = Object.create(this) ;
+                       setProperties(newObj, constructor) ; // constructor holds proto
                     }
-
-                    Object.defineProperties(newProto, {
-                          '$_proto_': { value: newProto, enumerable: false, writable: true }
-                        , '$_name_' : { value: null, enumerable: false, writable: true}
-                    });
-
-                    for (var p in proto) { // no proto.hasOwnProperty, copy all properties!
-                        newProto[p] = proto[p];
-                    }
-                    return newProto;
+                    return newObj;
                 }
             }, '$new': {
                 value: function () {
@@ -57,6 +50,7 @@
                         return val;
                     }
                     else {
+                        debugger ;
                         throw "No overridden method for '" + this.$_name_ + "'";
                     }
                 }
@@ -65,28 +59,55 @@
     }
 
     /* *** PRIVATE FUNCTIONS *** */
-    function buildConstructor(constructor, proto, preserve) {
-        var prop, prototype = this.prototype, constructor = this ;
+    function setProperties(obj, proto) {
+        Object.defineProperties(obj, {
+            '$_proto_': { value: obj, enumerable: false, writable: true }
+            , '$_name_' : { value: null, enumerable: false, writable: true}
+        });
+
+        for (var p in proto) { // no proto.hasOwnProperty, copy all properties!
+            obj[p] = proto[p];
+        }
+    }
+    function buildConstructor(child, proto, preserve) {
+        var prop, prototype = child.prototype, parent = this ;
 
         if ( (Object.prototype.toString.call(proto).slice(8, -1) === "Boolean" && proto === true || preserve === true) ) {
-            constructor = (new Function( 'base', 'return function ' + constructor.name + '(){ base.apply(this, arguments); };'))(constructor) ;
+            child = (new Function( 'base', 'return function ' + child.name + '(){ base.apply(this, arguments); };'))(child) ;
         }
 
-        constructor.prototype = new parent() ;
+        child.prototype = new parent() ;
+
         for( prop in prototype ) {
-            constructor.prototype[prop] = prototype[prop];
+            child.prototype[prop] = prototype[prop];
         }
-        constructor.prototype.constructor = this;                // fix instanceof
-        return constructor.prototype ;
+        for( prop in proto) {
+            child.prototype[prop] = proto[prop];
+        }
+        child.prototype.constructor = child ;                // fix instanceof
+        return child ;
     }
 
     function determineOverriddenFuncName(obj, caller) {
-        var index = -1, retval = caller.name;
+        var retval, index = -1 ;
+        if ( !caller || caller === obj.constructor) {
+           retval = 'constructor' ;
+        }
+        else {
+            retval = caller.name ;
+        }
+
         if (!retval) {
             var properties = Object.getOwnPropertyNames(obj.$_proto_);
-            while (obj.$_proto_[properties[++index]] !== caller) {
-            } // this will always be successful!
-            retval = properties[index]
+            for( var prop in properties) {
+                if ( obj.$_proto_[properties[prop]] === caller ){
+                    retval = properties[prop] ;
+                    break ;
+                }
+            }
+            if ( !retval ) {
+                retval = 'constructor' ;
+            }
         }
         return retval;
     }
