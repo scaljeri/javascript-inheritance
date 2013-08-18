@@ -4,20 +4,20 @@ module.exports = function(grunt) {
         pkg: grunt.file.readJSON('package.json')
         , jasmine: {
             prototypal: {
-                src: 'javascrpt-inheritance.js',
+                src: 'javascript-inheritance.js',
                 options: {
                     specs: 'specs/PrototypalInheritanceSpec.js',
-                    helpers: 'spec/SpecHelper.js',
+                    helpers: 'specs/SpecHelper.js',
                     junit: {
                         path: 'junit'
                     }
                 }
             }
             , classical : {
-                src: 'javascrpt-inheritance.js',
+                src: 'javascript-inheritance.js',
                 options: {
                     specs: 'specs/ClassicalInheritanceSpec.js',
-                    helpers: 'spec/SpecHelper.js',
+                    helpers: 'specs/SpecHelper.js',
                     junit: {
                         path: 'junit'
                     }
@@ -28,11 +28,9 @@ module.exports = function(grunt) {
             browser : false
         }
     }) ;
-
     grunt.loadNpmTasks('grunt-contrib-jasmine');
 
     grunt.registerTask('test', 'jasmine');
-
     // Default task.
     grunt.registerTask('default', 'jasmine');
 };
