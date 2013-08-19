@@ -46,7 +46,8 @@ module.exports = function (grunt) {
                         useDotNotation: true,
                         consolidate: true
                     }
-                }
+                },
+                all: ['specs/']
             }
             , 'jasmine-server': {
                 browser: false
