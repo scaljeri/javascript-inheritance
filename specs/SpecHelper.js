@@ -1,4 +1,4 @@
-window.beforeEach(function () {
+beforeEach(function () {
     this.addMatchers({
         toBeInstanceof: function (classRef) {
             return this.actual instanceof classRef;
