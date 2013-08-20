@@ -37,7 +37,10 @@ module.exports = function (grunt) {
                         template: require('grunt-template-jasmine-istanbul'),
                         templateOptions: {
                             coverage: 'junit/coverage/coverage.json',
-                            report: 'junit/coverage',
+                            //report: 'junit/coverage', // this will generate html output
+                            report: {
+                                type: 'text-summary'
+                            },
                             thresholds: {
                                 lines: 90,
                                 statements: 90,
