@@ -97,11 +97,10 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-watch');
-    grunt.loadNpmTasks('grunt-jasmine-node-coverage');
 
     grunt.registerTask('test', 'jasmine') ;
     grunt.registerTask('build', 'uglify') ;
 
-    grunt.registerTask('default', ['jasmine', 'jshint', 'jasmine_node']) ;
+    grunt.registerTask('default', ['jasmine', 'jshint']) ;
 }
 ;
