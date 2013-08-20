@@ -3,7 +3,7 @@ module.exports = function (grunt) {
     grunt.initConfig({
             pkg: grunt.file.readJSON('package.json'), uglify: {
                 options: {
-                    banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
+                    banner: '/*! <%= pkg.name %> v<%= pkg.version %> (<%= grunt.template.today("yyyy-mm-dd") %>) by <%= pkg.author %> */\n'
                 },
                 build: {
                     src: 'javascript-inheritance.js',
@@ -47,31 +47,6 @@ module.exports = function (grunt) {
                         }
                     }
                 }
-            },
-            jasmine_node: {
-                coverage: {
-                    savePath: "./junit/coverage/"
-                },
-                options: {
-                    //forceExit: true,
-                    //match: './',
-                    //matchall: false,
-                    //extensions: 'js',
-                    //specNameMatcher: 'spec',
-                    //junitreport: {
-                        //report: false,
-                        //useDotNotation: true,
-                        //consolidate: true
-                    //}
-                    //, excludes: ['**/specs/**']
-                }
-                //
-                //projectRoot: './',
-                //specFolders: ['specs'],
-                //useHelpers: false,
-                //verbose: true,
-                //colors: true,
-                //all: ['specs/']
             }
             , 'jasmine-server': {
                 browser: false
