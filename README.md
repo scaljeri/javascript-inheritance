@@ -5,7 +5,7 @@ JavaScript helper functions for Classical and Prototypal Inheritance [![Build St
 
 example:
 
-  var Base = Object.$augment( (function() { // create closure
+    var Base = Object.$augment( (function() { // create closure
         var message = '' ;
         return  {
                 initialize: function(msg, total) {

@@ -1,4 +1,4 @@
-describe("Javascript Prototypal Inheritance", function () {
+describe('Javascript Prototypal Inheritance', function () {
 
     // setup prototypes
     var Base = (function () { // create closure
@@ -10,7 +10,7 @@ describe("Javascript Prototypal Inheritance", function () {
                 }, getValue: function () {
                     return this.multi * value;
                 }, toString: function () {
-                    return this.name
+                    return this.name ;
                 }
                 , multi: 1
             }
@@ -40,14 +40,14 @@ describe("Javascript Prototypal Inheritance", function () {
         bar = Bar.$new(100);
     });
 
-    it("should create new instances using Foo", function () {
+    it('should create new instances using Foo', function () {
         expect(Base).toBeDefined();
         expect(Bar).toBeDefined();
         expect(Foo).toBeDefined();
         expect(foo).toBeDefined();
         expect(bar).toBeDefined();
     });
-    it("should create instance with a correct prototype chain", function(){
+    it('should create instance with a correct prototype chain', function(){
         var proto = Object.getPrototypeOf(foo) ;
         expect(proto).toBe(Foo);
         proto = Object.getPrototypeOf(proto) ;
@@ -59,7 +59,7 @@ describe("Javascript Prototypal Inheritance", function () {
         proto = Object.getPrototypeOf(proto) ;
         expect(proto).toBeNull() ;
     }) ;
-    it("should create instances with correct properties", function() {
+    it('should create instances with correct properties', function() {
         expect(foo.name).toEqual('Foo');
         expect(bar.name).toEqual('Bar');
         expect(foo.multi).toEqual(3) ;
@@ -69,8 +69,8 @@ describe("Javascript Prototypal Inheritance", function () {
         expect(bar.getValue()).toEqual(200) ;
         expect(foo.getValue()).toEqual(900) ;
     }) ;
-    it("should throw an exception if overriden method does not exist", function(){
+    it('should throw an exception if overriden method does not exist', function(){
         Foo.newFunc = function(){ this.$super()} ;
-        expect(foo.newFunc.bind(foo)).toThrow("No overridden method for 'newFunc'") ;
+        expect(foo.newFunc.bind(foo)).toThrow('No overridden method for "newFunc"') ;
     })
 });

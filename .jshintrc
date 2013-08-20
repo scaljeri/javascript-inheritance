@@ -3,12 +3,24 @@
     "eqeqeq": true,
     "immed": true,
     "latedef": true,
-    "newcap": true,
-    "noarg": true,
+    "newcap": false,
+    "quotmark": "single",
+    "unused": true,
+    "trailing": true,
     "sub": true,
     "undef": true,
+    "maxcomplexity": 5,
     "boss": true,
     "eqnull": true,
     "node": true,
-    "laxcomma": true
+    "laxcomma": true,
+    "strict": false,
+    "eval": true,
+
+    "globalstrict": true,
+    "laxbreak": true,
+    "laxcomma": true,
+    "supernew": true,
+    "validthis": true,
+    "loopfunc": true
 }

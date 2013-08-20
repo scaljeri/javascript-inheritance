@@ -5,7 +5,7 @@ beforeEach(function () {
         }
     });
     this.addMatchers({
-        toBeAnArray: function (classRef) {
+        toBeAnArray: function () {
             return Array.isArray(this.actual);
         }
     });

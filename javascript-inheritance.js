@@ -3,9 +3,8 @@
         Object.defineProperties(Object.prototype, {
             '$augment': {
                 value: function (constructor, proto, preserve) {
-                    var newObj ;
                     if ( constructor.apply ) { // its a function - constructor
-                       newObj = buildConstructor.apply(this, arguments) ;
+                       var newObj = buildConstructor.apply(this, arguments) ;
                        setProperties(newObj.prototype,proto) ; // constructor holds proto
                     }
                     else {
@@ -16,7 +15,6 @@
                 }
             }, '$new': {
                 value: function () {
-                    var newObj ;
                     // determine if dealing with prototypal or classical inheritance
                     if ( Object.prototype.toString.call(this).slice(8, -1) === 'Object' ) { // prototypal
                         var newObj = Object.create(this);
@@ -34,7 +32,7 @@
                 }
             }, '$super': {
                 value: function () {
-                    var caller = arguments.callee.caller;
+                    var _proto_, caller = arguments.callee.caller;
                     if (!this.$_name_) { // determine the overridden function name only the first time
                         this.$_name_ = determineOverriddenFuncName(this, caller);
                     }
@@ -50,8 +48,7 @@
                         return val;
                     }
                     else {
-                        debugger ;
-                        throw "No overridden method for '" + this.$_name_ + "'";
+                        throw 'No overridden method for "' + this.$_name_ + '"';
                     }
                 }
             }
@@ -72,7 +69,7 @@
     function buildConstructor(child, proto, preserve) {
         var prop, prototype = child.prototype, parent = this ;
 
-        if ( (Object.prototype.toString.call(proto).slice(8, -1) === "Boolean" && proto === true || preserve === true) ) {
+        if ( (Object.prototype.toString.call(proto).slice(8, -1) === 'Boolean' && proto === true || preserve === true) ) {
             child = (new Function( 'base', 'return function ' + child.name + '(){ base.apply(this, arguments); };'))(child) ;
         }
 
@@ -94,22 +91,20 @@
            retval = 'constructor' ;
         }
         else {
-            retval = caller.name ;
-        }
-
-        if (!retval) {
-            var properties = Object.getOwnPropertyNames(obj.$_proto_);
-            for( var prop in properties) {
-                if ( obj.$_proto_[properties[prop]] === caller ){
-                    retval = properties[prop] ;
-                    break ;
-                }
-            }
-            if ( !retval ) {
-                retval = 'constructor' ;
-            }
+            retval = caller.name ||  findFunctionInObject(obj.$_proto_, caller) ;
         }
         return retval;
+    }
+
+    function findFunctionInObject(obj, func) {
+        var retval = 'constructor', properties = Object.getOwnPropertyNames(obj);
+        for( var prop in properties) {
+            if ( obj[properties[prop]] === func ){
+                retval = properties[prop] ;
+                break ;
+            }
+        }
+        return retval ;
     }
 
     // find the overridden function by traversing the prototype chain
