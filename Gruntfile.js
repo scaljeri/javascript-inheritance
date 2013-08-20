@@ -29,25 +29,49 @@ module.exports = function (grunt) {
                             path: 'junit'
                         }
                     }
+                },
+                coverage: {
+                    src: ['javascript-inheritance.js'],
+                    options: {
+                        specs: ['specs/*.js'],
+                        template: require('grunt-template-jasmine-istanbul'),
+                        templateOptions: {
+                            coverage: 'junit/coverage/coverage.json',
+                            report: 'junit/coverage',
+                            thresholds: {
+                                lines: 90,
+                                statements: 90,
+                                branches: 75,
+                                functions: 100
+                            }
+                        }
+                    }
                 }
             },
             jasmine_node: {
                 coverage: {
+                    savePath: "./junit/coverage/"
                 },
                 options: {
-                    forceExit: true,
-                    match: '.',
-                    matchall: false,
-                    extensions: 'js',
-                    specNameMatcher: 'spec',
-                    junitreport: {
-                        report: false,
-                        savePath: "./junit/coverage/",
-                        useDotNotation: true,
-                        consolidate: true
-                    }
-                },
-                all: ['specs/']
+                    //forceExit: true,
+                    //match: './',
+                    //matchall: false,
+                    //extensions: 'js',
+                    //specNameMatcher: 'spec',
+                    //junitreport: {
+                        //report: false,
+                        //useDotNotation: true,
+                        //consolidate: true
+                    //}
+                    //, excludes: ['**/specs/**']
+                }
+                //
+                //projectRoot: './',
+                //specFolders: ['specs'],
+                //useHelpers: false,
+                //verbose: true,
+                //colors: true,
+                //all: ['specs/']
             }
             , 'jasmine-server': {
                 browser: false
