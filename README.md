@@ -3,52 +3,95 @@ javascript-inheritance
 
 JavaScript helper functions for Classical and Prototypal Inheritance [![Build Status](https://travis-ci.org/scaljeri/javascript-inheritance.png)](https://travis-ci.org/scaljeri/javascript-inheritance)
 
-example:
+# Build #
 
-    var Base = Object.$augment( (function() { // create closure
-        var message = '' ;
-        return  {
-                initialize: function(msg, total) {
-                        message = msg ;
-                        this.total = total
-                }
-                , getMessage: function() {
-                        return  message ;
-                }
-                , getTotal: function() {
-                        return this.total ;
-                }
-                , add: function(value) {
-                        this.total += value ;
-                }
+    $> grunt build
+
+this command creates a minified version of the library inside the build directory.
+
+# Documentation #
+
+TODO
+
+# Examples #
+
+Prototypal Inheritance example:
+
+    var baseProto = (function() { // closure, Module Pattern
+        var value = 0;
+
+        function Base(input) { // create closure
+            value = input;
+            this.name = 'Base';
+        }
+
+        Base.prototype.getValue = function () {
+            return this.multi * value;
         } ;
-    })()) ;
+        return Base ;
+    })() ;
+    var Base = Object.$augment( baseProto, {        // the third param is added to the prototype
+                toString: function () {
+                    return this.name ;
+                }, multi: 1
+            }
+        )
+        , Bar = Base.$augment(function Bar(input) {
+            this.$super(input);
+            this.name = 'Bar';
+        }, { multi: 2 })                            // add multi param to the prototype
 
-    var Bar = Base.$augment( {
-        initialize: function initialize(msg) {
-                this.$super(msg, 10) ;
+        , FooConstructor = function (input) {
+            this.$super(input);
+            this.name = 'Foo';
         }
-        , getTotal: function getTotal() {
-                return 10 + this.$super() ;
-        }
-        , add: function add(value) {
-                this.$super(2*value) ;
-        }
-    }) ;
+        , Foo = Bar.$augment( FooConstructor, {     // extend Bar without changing FooConstructor
+            getValue: function () {
+                return this.multi * this.$super();
+            }, multi: 3
+        }, true)                                    // should be TRUE, otherwise the $augment will modify FooConstructor
+        , foo, bar;
 
-    var Foo = Bar.$augment( {
-        initialize: function initialize(msg) {
-                this.$super(msg) ;
-        }
-        , getMessage: function getMessage() {
-                return 'Foo ' + this.$super() ;
-        }
-        , add: function add(value) {
-                this.$super(value) ;
-        }
-    }) ;
+    bar = new Bar(10);
+    foo = Foo.$new(100);
 
-    var foo = Foo.$new('Inheritance') ;
-    console.log(foo.total) ; // --> 100 ;
-    console.log(foo.getTotal()) ; // --> 110 ;
-    console.log(foo.getMessage()) ; // --> Foo Inheritance ;
+
+Classical Inheritance example:
+
+    var baseProto = (function() { // closure, Module Pattern
+        var value = 0;
+
+        function Base(input) { // create closure
+            value = input;
+            this.name = 'Base';
+        }
+
+        Base.prototype.getValue = function () {
+            return this.multi * value;
+        } ;
+        return Base ;
+    })() ;
+    var Base = Object.$augment( baseProto, {        // the third param is added to the prototype
+                toString: function () {
+                    return this.name ;
+                }, multi: 1
+            }
+        )
+        , Bar = Base.$augment(function Bar(input) {
+            this.$super(input);
+            this.name = 'Bar';
+        }, { multi: 2 })                            // add multi param to the prototype
+
+        , FooConstructor = function (input) {
+            this.$super(input);
+            this.name = 'Foo';
+        }
+        , Foo = Bar.$augment( FooConstructor, {     // extend Bar without changing FooConstructor
+            getValue: function () {
+                return this.multi * this.$super();
+            }, multi: 3
+        }, true)                                    // should be TRUE, otherwise the $augment will modify FooConstructor
+        , foo, bar;
+
+     bar = new Bar(10);
+     foo = Foo.$new(100);
