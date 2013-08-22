@@ -3,19 +3,17 @@ javascript-inheritance
 
 JavaScript helper functions for Classical and Prototypal Inheritance [![Build Status](https://travis-ci.org/scaljeri/javascript-inheritance.png)](https://travis-ci.org/scaljeri/javascript-inheritance)
 
-# Build #
+## Build minified version #
 
     $> grunt build
 
-this command creates a minified version of the library inside the build directory.
-
-# Documentation #
+## Documentation ##
 
 TODO
 
-# Examples #
+## Examples ##
 
-Prototypal Inheritance example:
+### Prototypal Inheritance example: ###
 
     var baseProto = (function() { // closure, Module Pattern
         var value = 0;
@@ -30,7 +28,7 @@ Prototypal Inheritance example:
         } ;
         return Base ;
     })() ;
-    var Base = Object.$augment( baseProto, {        // the third param is added to the prototype
+    var Base = Object.$augment( baseProto, {        // the second param is added to the prototype
                 toString: function () {
                     return this.name ;
                 }, multi: 1
@@ -56,7 +54,7 @@ Prototypal Inheritance example:
     foo = Foo.$new(100);
 
 
-Classical Inheritance example:
+### Classical Inheritance example: ###
 
     var baseProto = (function() { // closure, Module Pattern
         var value = 0;
@@ -71,7 +69,7 @@ Classical Inheritance example:
         } ;
         return Base ;
     })() ;
-    var Base = Object.$augment( baseProto, {        // the third param is added to the prototype
+    var Base = Object.$augment( baseProto, {        // the second param is added to the prototype
                 toString: function () {
                     return this.name ;
                 }, multi: 1
