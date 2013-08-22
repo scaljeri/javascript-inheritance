@@ -2,7 +2,30 @@
     if (Object.prototype.$augment === undefined) {
         Object.defineProperties(Object.prototype, {
             '$augment': {
-                value: function (constructor, proto, preserve) {
+                /**
+                 * The context of this function is the parent class, which is extended by 'constructor'. The
+                 * constructor's value is a Function if classical inheritance is used and an Object if Prototypal
+                 * inheritance applied.
+                 *
+                 * Classical:
+                 *
+                 *     Bar = function() {  } ;
+                 *     Foo = Bar.$augment(function(){}) ;
+                 *     foo = new Foo() ; // or
+                 *     foo = Foo.$new() ;
+                 *
+                 * Prototypal:
+                 *
+                 *     Bar = { initialize: function(){} }
+                 *     Foo = Bar.$augment({ initialize: function(){}}) ;
+                 *     foo = Foo.$new() ;
+                 *
+                 * @param {Object|Function} constructor constructor function or object
+                 * @param {Object} [proto={}] additional prototype properties
+                 * @param {Boolean} [preserve=false] if true the constructor function is cloned (only for Classical inheritance) ;
+                 * @returns {Object|Function} depending on Classical or Prototypal inheritance a Function or Object, resp. is returned
+                 */
+                value: function (constructor, proto) {
                     if ( constructor.apply ) { // its a function - constructor
                        var newObj = buildConstructor.apply(this, arguments) ;
                        setProperties(newObj.prototype,proto) ; // constructor holds proto
@@ -32,22 +55,30 @@
                 }
             }, '$super': {
                 value: function () {
-                    var _proto_, caller = arguments.callee.caller;
-                    if (!this.$_name_) { // determine the overridden function name only the first time
-                        this.$_name_ = determineOverriddenFuncName(this, caller);
-                    }
+                    var retval, caller = arguments.callee.caller;
+                    /* set the name of the function calling $super. Things to check are:
+                        * if $super is called from inside an overridden method, $_name_ is already set.
+                        * caller can be null inside a constructor
+                        * caller.name can be null inside an anonymous function
+                     */
+                    this.$_name_ || (
+                            this.$_name_ = ( (!caller || caller === this.constructor) ?
+                                'constructor' :
+                                caller.name || findFunctionInObject(this.$_proto_, caller)
+                            )
+                        ) ;
 
-                    if ((_proto_ = traversePrototypeChain(this, caller))) { // found overridden method?
-                        this.$_proto_ = _proto_;
-                        var val = _proto_[this.$_name_].apply(this, arguments);
+                    // with the name the overridden method can be found somewhere in the prototype chain
+                    if ((this.$_proto_ = traversePrototypeChain(this, caller))) { // found overridden method?
+                        retval = this.$_proto_[this.$_name_].apply(this, arguments);
 
                         // done, reset values
                         this.$_proto_ = Object.getPrototypeOf(this);
                         this.$_name_ = null;
 
-                        return val;
+                        return retval;
                     }
-                    else {
+                    else { // $super was called and no overridden function was found in the prototype chain
                         throw 'No overridden method for "' + this.$_name_ + '"';
                     }
                 }
@@ -57,23 +88,28 @@
 
     /* *** PRIVATE FUNCTIONS *** */
     function setProperties(obj, proto) {
-        Object.defineProperties(obj, {
+        Object.defineProperties(obj, { // each instance will have these properties. They're used to call overridden methods
             '$_proto_': { value: obj, enumerable: false, writable: true }
             , '$_name_' : { value: null, enumerable: false, writable: true}
         });
 
-        for (var p in proto) { // no proto.hasOwnProperty, copy all properties!
+        for (var p in proto) { // no proto.hasOwnProperty --> copy all properties!
             obj[p] = proto[p];
         }
     }
+    /* with classical inheritance the constructor function's prototype is augmented with properties from its parent and
+     * addition properties from 'proto'. Set 'preserve' to TRUE to leave the constructor as it is, and create a new
+     * constructor instead.
+     */
     function buildConstructor(child, proto, preserve) {
-        var prop, prototype = child.prototype, parent = this ;
+        var prop, prototype = child.prototype ;
 
-        if ( (Object.prototype.toString.call(proto).slice(8, -1) === 'Boolean' && proto === true || preserve === true) ) {
+        // check if preserve is TRUE (note that proto is optional and can hold the boolean value of 'preserve')
+        if ( (proto === true || preserve === true) ) {
             child = (new Function( 'base', 'return function ' + child.name + '(){ base.apply(this, arguments); };'))(child) ;
         }
 
-        child.prototype = new parent() ;
+        child.prototype = new this() ;
 
         for( prop in prototype ) {
             child.prototype[prop] = prototype[prop];
@@ -83,17 +119,6 @@
         }
         child.prototype.constructor = child ;                // fix instanceof
         return child ;
-    }
-
-    function determineOverriddenFuncName(obj, caller) {
-        var retval, index = -1 ;
-        if ( !caller || caller === obj.constructor) {
-           retval = 'constructor' ;
-        }
-        else {
-            retval = caller.name ||  findFunctionInObject(obj.$_proto_, caller) ;
-        }
-        return retval;
     }
 
     function findFunctionInObject(obj, func) {
