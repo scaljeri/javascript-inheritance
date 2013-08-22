@@ -13,7 +13,7 @@ describe('Javascript Prototypal Inheritance', function () {
                     return this.name ;
                 }
                 , multi: 1
-            }
+            } ;
         })()
         , Bar = Base.$augment({
             initialize: function (input) {
@@ -32,7 +32,7 @@ describe('Javascript Prototypal Inheritance', function () {
             }
             , multi: 3
         })
-        , foo;
+        , bar, foo;
 
 
     beforeEach(function () {
@@ -70,7 +70,7 @@ describe('Javascript Prototypal Inheritance', function () {
         expect(foo.getValue()).toEqual(900) ;
     }) ;
     it('should throw an exception if overriden method does not exist', function(){
-        Foo.newFunc = function(){ this.$super()} ;
+        Foo.newFunc = function(){ this.$super();} ;
         expect(foo.newFunc.bind(foo)).toThrow('No overridden method for "newFunc"') ;
-    })
+    }) ;
 });
