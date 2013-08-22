@@ -40,7 +40,7 @@ describe('Javascript Prototypal Inheritance', function () {
         bar = Bar.$new(100);
     });
 
-    it('should create new instances using Foo', function () {
+    it('should create new instances', function () {
         expect(Base).toBeDefined();
         expect(Bar).toBeDefined();
         expect(Foo).toBeDefined();
