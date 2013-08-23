@@ -7,6 +7,6 @@ This library provides helper functions for Classical and Prototypal Inheritance
 
 For documentation visit the <a href="http://scaljeri.github.io/javascript-inheritance/">github page</a>
 
-## Build minified version #
+## Build minified version ##
 
     $> grunt build
