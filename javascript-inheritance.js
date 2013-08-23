@@ -86,16 +86,18 @@
 
     /* *** PRIVATE FUNCTIONS *** */
     function setProperties(obj, proto) {
-        /* _$p - holds the prototype object which contains the overridden method
-           _$n - the name of the overridden method
+        /* _$p --> holds the prototype object which contains the overridden method
+           _$n --> the name of the overridden method
          */
         Object.defineProperties(obj, { // each instance will have these properties. They're used to call overridden methods
             '_$p': { value: obj, enumerable: false, writable: true }
             , '_$n' : { value: null, enumerable: false, writable: true}
         });
 
-        for (var p in proto) { // no proto.hasOwnProperty --> copy all properties!
-            obj[p] = proto[p];
+        for (var p in proto) {
+            if ( proto.hasOwnProperty(p)) {
+                obj[p] = proto[p];
+            }
         }
     }
     /* with classical inheritance the constructor function's prototype is augmented with properties from its parent and
@@ -107,13 +109,15 @@
 
         // check if preserve is TRUE (note that proto is optional and can hold the boolean value of 'preserve')
         if ( (proto === true || preserve === true) ) {
-            child = (new Function( 'base', 'return function ' + child.name + '(){ base.apply(this, arguments); };'))(child) ;
+            child = (new Function( 'b', 'return function ' + child.name + '(){ b.apply(this, arguments); };'))(child) ;
         }
 
         dummy = new this() ;
 
         for( prop in cproto ) {
-            dummy[prop] = cproto[prop];
+            if ( cproto.hasOwnProperty(prop) ) {
+                dummy[prop] = cproto[prop];
+            }
         }
         setProperties(dummy, proto) ;
         child.prototype = dummy ;
