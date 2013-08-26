@@ -47,7 +47,7 @@
                     }
                     else {  // prototypal
                         var newObj = Object.create(this);
-                        newObj.initialize.apply(newObj, arguments);
+                        newObj.constructor.apply(newObj, arguments);
                     }
                     return newObj;
                 }

@@ -4,7 +4,7 @@ describe('Javascript Prototypal Inheritance', function () {
     var Base = (function () { // create closure
             var value = 0;
             return {
-                initialize: function (input) {
+                constructor: function (input) {
                     value = input;
                     this.name = 'Base';
                 }, getValue: function () {
@@ -16,14 +16,14 @@ describe('Javascript Prototypal Inheritance', function () {
             } ;
         })()
         , Bar = Base.$augment({
-            initialize: function (input) {
+            constructor: function (input) {
                 this.$super(input);
                 this.name = 'Bar';
             }
             , multi: 2
         })
         , Foo = Bar.$augment({
-            initialize: function initialize(input) {
+            constructor: function initialize(input) {
                 this.$super(input);
                 this.name = 'Foo';
             }
@@ -33,7 +33,6 @@ describe('Javascript Prototypal Inheritance', function () {
             , multi: 3
         })
         , bar, foo;
-
 
     beforeEach(function () {
         foo = Foo.$new(100);
