@@ -2,6 +2,7 @@
   "name": "javascript-inheritance",
   "version": "1.0.0",
   "description": "Javascript Inheritance helper functions for both Classical and Prototypal Inheritance.",
+  "homepage": "http://calje.eu/index.php/javascript-oop/",
   "main": "javascript-inheritance.js",
   "ignore": [
         "junit",
