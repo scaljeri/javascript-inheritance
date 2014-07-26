@@ -3,6 +3,16 @@
   "version": "1.0.0",
   "description": "Javascript Inheritance helper functions for both Classical and Prototypal Inheritance.",
   "main": "javascript-inheritance.js",
+  "ignore": [
+        "junit",
+        "spec",
+        ".travis.yml",
+        ".Gruntfile.js",
+        ".jshintrc",
+        "Gruntfile.js",
+        "package.json",
+        "README.md"
+  ],
   "scripts": {
     "test": "grunt test"
   },
