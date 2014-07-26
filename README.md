@@ -3,7 +3,9 @@ javascript-inheritance [![Build Status](https://travis-ci.org/scaljeri/javascrip
 
 Javascript Inheritance made easy! This library provides helper functions for both, Classical and Prototypal Inheritance
 
-For documentation visit the <a href="http://scaljeri.github.io/javascript-inheritance/">github page</a>
+For documentation checkout <a href="http://calje.eu/index.php/javascript-oop/" target="_blank">this</a> page.
+
+Example code is avalable on the <a href="http://scaljeri.github.io/javascript-inheritance/">github page</a>
 
 ### Grunt tasks ###
 
