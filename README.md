@@ -21,7 +21,7 @@ To see which tasks are available do
 
     $> grunt --help
 
-and to execute one, for example, to minify the library, do
+and to run a task, for example to minify the library, do
 
     $> grunt build
 
