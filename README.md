@@ -7,6 +7,10 @@ For documentation checkout <a href="http://calje.eu/index.php/javascript-oop/" t
 
 Example code is avalable on the <a href="http://scaljeri.github.io/javascript-inheritance/">github page</a>
 
+### Install using bower ###
+
+    $> bower install javascript-inheritance --save
+   
 ### Grunt tasks ###
 
 Install the dependencies as follows
