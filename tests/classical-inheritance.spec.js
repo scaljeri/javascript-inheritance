@@ -32,7 +32,9 @@ describe('Javascript Classical Inheritance', function () {
         , Foo = Bar.$augment( FooConstructor, {     // extend Bar without changing FooConstructor
             getValue: function () {
                 return this.multi * this.$super();
-            }, multi: 3
+            },
+            newFunc: function () { this.$super(); }, // there is no $super!
+            multi: 3
         }, true)                                    // should be TRUE, otherwise the $augment will modify FooConstructor
         , foo, bar;
 
@@ -67,8 +69,7 @@ describe('Javascript Classical Inheritance', function () {
         expect(bar.getValue()).toEqual(200);
         expect(foo.getValue()).toEqual(900);
     });
-    xit('should throw an exception if overriden method does not exist', function(){
-        Foo.prototype.newFunc = function(){ this.$super(); } ;
+    it('should throw an exception if overriden method does not exist', function(){
         expect(foo.newFunc.bind(foo)).toThrow('No overridden method for "newFunc"') ;
     });
 });

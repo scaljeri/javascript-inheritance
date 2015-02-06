@@ -50,6 +50,7 @@ gulp.task('test', function () {
             'jasmine'
         ],
         files: [
+            'node_modules/es5-shim/es5-shim.js', // needed for the bind function ( http://bit.ly/1vwmJa3 )
             'javascript-inheritance.js',
             'tests/spec-helper.js',
             'tests/prototypal-inheritance.spec.js',
@@ -62,6 +63,7 @@ gulp.task('test', function () {
             'javascript-inheritance.js': 'coverage'
         },
         reporters: [
+            'dots',     // write output to console
             'junit',
             'coverage'
         ],
