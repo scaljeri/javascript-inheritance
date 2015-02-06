@@ -1,5 +1,6 @@
-javascript-inheritance [![Build Status](https://travis-ci.org/scaljeri/javascript-inheritance.png)](https://travis-ci.org/scaljeri/javascript-inheritance)
-======================
+[![Build Status](https://travis-ci.org/scaljeri/javascript-inheritance.png)](https://travis-ci.org/scaljeri/javascript-inheritance) [![Coverage Status](https://coveralls.io/repos/scaljeri/javascript-inheritance/badge.svg?branch=master)](https://coveralls.io/r/scaljeri/javascript-inheritance?branch=master)
+
+Javascript Inheritance Library
 
 Javascript Inheritance made easy! This library provides helper functions for both, Classical and Prototypal Inheritance
 
