@@ -1,3 +1,6 @@
 .idea/
 coverage/
 target/
+junit/
+node_modules/
+.coveralls.yml
