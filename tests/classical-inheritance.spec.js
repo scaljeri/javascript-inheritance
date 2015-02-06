@@ -67,7 +67,7 @@ describe('Javascript Classical Inheritance', function () {
         expect(bar.getValue()).toEqual(200);
         expect(foo.getValue()).toEqual(900);
     });
-    it('should throw an exception if overriden method does not exist', function(){
+    xit('should throw an exception if overriden method does not exist', function(){
         Foo.prototype.newFunc = function(){ this.$super(); } ;
         expect(foo.newFunc.bind(foo)).toThrow('No overridden method for "newFunc"') ;
     });

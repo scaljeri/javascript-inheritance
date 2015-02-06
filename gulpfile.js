@@ -51,7 +51,9 @@ gulp.task('test', function () {
         ],
         files: [
             'javascript-inheritance.js',
-            'tests/*.js'
+            'tests/spec-helper.js',
+            'tests/prototypal-inheritance.spec.js',
+            'tests/classical-inheritance.spec.js'
         ],
         junitReporter: {
             outputFile: 'target/junit.xml'
