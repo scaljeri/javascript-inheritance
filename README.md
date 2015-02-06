@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/scaljeri/javascript-inheritance.png)](https://travis-ci.org/scaljeri/javascript-inheritance) [![Coverage Status](https://coveralls.io/repos/scaljeri/javascript-inheritance/badge.svg?branch=master)](https://coveralls.io/r/scaljeri/javascript-inheritance?branch=master)
+[![Build Status](https://travis-ci.org/scaljeri/javascript-inheritance.png)](https://travis-ci.org/scaljeri/javascript-inheritance) [![Coverage Status](https://coveralls.io/repos/scaljeri/javascript-inheritance/badge.svg?branch=master)](https://coveralls.io/r/scaljeri/javascript-inheritance?branch=master) [![Dependency Status](https://david-dm.org/scaljeri/javascript-inheritance.svg)](https://david-dm.org/scaljeri/javascript-inheritance)  [![devDependency Status](https://david-dm.org/scaljeri/javascript-inheritance/dev-status.svg)](https://david-dm.org/scaljeri/javascript-inheritance#info=devDependencies)
 
 Javascript Inheritance Library
 
