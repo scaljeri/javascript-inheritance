@@ -15,7 +15,8 @@
     "node": true,
     "laxcomma": true,
     "strict": false,
-    "eval": true,
+    "evil": true,
+    "expr": true,
 
     "globalstrict": true,
     "laxbreak": true,

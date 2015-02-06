@@ -25,9 +25,11 @@
                  * @param {Boolean} [preserve=false] if true the constructor function is cloned (only for Classical inheritance) ;
                  * @returns {Object|Function} depending on Classical or Prototypal inheritance a Function or Object, resp. is returned
                  */
-                value: function (constructor, proto) {
+                value: function (constructor) {
+                    var newObj;
+
                     if ( isFunction(constructor) ) { // its a function - constructor
-                       var newObj = buildConstructor.apply(this, arguments) ;
+                       newObj = buildConstructor.apply(this, arguments) ;
                     }
                     else {
                        newObj = Object.create(this) ;
@@ -37,17 +39,21 @@
                 }
             }, '$new': {
                 value: function () {
+                    var newObj,
+                        constructor = this,
+                        args = arguments;
+
+                    function Fake(){
+                        constructor.apply(this, args) ;
+                    }
+
                     if ( isFunction(this) ) { // classical
-                        var constructor = this, args = arguments ;
-                        function Fake(){
-                            constructor.apply(this, args) ;
-                        }
                         Fake.prototype = this.prototype ;
                         newObj = new Fake() ;
                     }
                     else {  // prototypal
-                        var newObj = Object.create(this);
-                        newObj.constructor.apply(newObj, arguments);
+                        newObj = Object.create(this);
+                        newObj.constructor.apply(newObj, args);
                     }
                     return newObj;
                 }
