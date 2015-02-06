@@ -23,7 +23,7 @@ describe('Javascript Prototypal Inheritance', function () {
             , multi: 2
         })
         , Foo = Bar.$augment({
-            constructor: function initialize(input) {
+            constructor: function (input) {
                 this.$super(input);
                 this.name = 'Foo';
             }

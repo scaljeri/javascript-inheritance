@@ -16,8 +16,8 @@
                  *
                  * Prototypal:
                  *
-                 *     Bar = { initialize: function(){} }
-                 *     Foo = Bar.$augment({ initialize: function(){}}) ;
+                 *     Bar = { constructor: function(){} }
+                 *     Foo = Bar.$augment({ constructor: function(){}}) ;
                  *     foo = Foo.$new() ;
                  *
                  * @param {Object|Function} constructor constructor function or object
