@@ -4,8 +4,14 @@ Javascript Inheritance Library
 
 Javascript Inheritance made easy! This library provides helper functions for both, Classical and Prototypal Inheritance
 
-For documentation visit the <a href="http://scaljeri.github.io/javascript-inheritance/">github page</a>
+For documentation checkout <a href="http://calje.eu/index.php/javascript-oop/" target="_blank">this</a> page.
 
+Example code is avalable on the <a href="http://scaljeri.github.io/javascript-inheritance/">github page</a>
+
+### Install using bower ###
+
+    $> bower install javascript-inheritance --save
+   
 ### Grunt tasks ###
 
 Install the dependencies as follows
@@ -16,7 +22,7 @@ To see which tasks are available do
 
     $> grunt --help
 
-and to execute one, for example, to minify the library, do
+and to run a task, for example to minify the library, do
 
     $> grunt build
 
