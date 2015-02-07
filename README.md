@@ -14,18 +14,12 @@ Example code is avalable on the <a href="http://scaljeri.github.io/javascript-in
 
     $> bower install javascript-inheritance --save
    
-### Grunt tasks ###
+### Build ###
 
 Install the dependencies as follows
 
     $> npm install
 
-To see which tasks are available do
+To minify the library do
 
-    $> grunt --help
-
-and to run a task, for example to minify the library, do
-
-    $> grunt build
-
-This will create a minified version of javascript-inheritance.js in the build directory.
+    $> gulp
