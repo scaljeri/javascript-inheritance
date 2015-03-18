@@ -2,6 +2,8 @@
 
 [![Build Status](https://travis-ci.org/scaljeri/javascript-inheritance.png)](https://travis-ci.org/scaljeri/javascript-inheritance) [![Coverage Status](https://coveralls.io/repos/scaljeri/javascript-inheritance/badge.svg?branch=master)](https://coveralls.io/r/scaljeri/javascript-inheritance?branch=master) [![Dependency Status](https://david-dm.org/scaljeri/javascript-inheritance.svg)](https://david-dm.org/scaljeri/javascript-inheritance)  [![devDependency Status](https://david-dm.org/scaljeri/javascript-inheritance/dev-status.svg)](https://david-dm.org/scaljeri/javascript-inheritance#info=devDependencies) [![Code Climate](https://codeclimate.com/github/scaljeri/javascript-inheritance/badges/gpa.svg)](https://codeclimate.com/github/scaljeri/javascript-inheritance)
 
+[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/scaljeri/javascript-inheritance?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+
 Javascript Inheritance Library
 
 Javascript Inheritance made easy! This library provides helper functions for both, Classical and Prototypal Inheritance
