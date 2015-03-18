@@ -12,6 +12,8 @@ Example code is avalable on the <a href="http://scaljeri.github.io/javascript-in
 
 ### Install using bower ###
 
+[![Join the chat at https://gitter.im/scaljeri/javascript-inheritance](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/scaljeri/javascript-inheritance?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
     $> bower install javascript-inheritance --save
    
 ### Build ###
