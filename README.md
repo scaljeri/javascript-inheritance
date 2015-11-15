@@ -25,3 +25,7 @@ Install the dependencies as follows
 To minify the library do
 
     $> gulp
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/scaljeri/javascript-inheritance/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
